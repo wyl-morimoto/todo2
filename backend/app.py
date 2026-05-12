@@ -46,6 +46,17 @@ class Task(db.Model):
             'completed_date': self.completed_date
         }
 
+class Assignee(db.Model):
+    __tablename__ = 'assignees'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False, unique=True)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name
+        }
+
 # アプリケーションコンテキスト内でテーブル作成 (存在しない場合のみ作成される)
 with app.app_context():
     db.create_all()
@@ -55,6 +66,13 @@ with app.app_context():
         db.session.commit()
     except Exception:
         db.session.rollback()
+
+    # デフォルト担当者の追加
+    if Assignee.query.count() == 0:
+        default_assignees = ['森本', '黒瀬', '浅井']
+        for name in default_assignees:
+            db.session.add(Assignee(name=name))
+        db.session.commit()
 
 @app.route('/')
 def index():
@@ -128,6 +146,28 @@ def delete_task(task_id):
     db.session.delete(task)
     db.session.commit()
     return jsonify({'success': True})
+
+@app.route('/api/assignees', methods=['GET'])
+def get_assignees():
+    assignees = Assignee.query.order_by(Assignee.id).all()
+    return jsonify([a.to_dict() for a in assignees])
+
+@app.route('/api/assignees', methods=['POST'])
+def create_assignee():
+    data = request.json
+    name = data.get('name')
+    if not name:
+        return jsonify({'error': 'Name is required'}), 400
+
+    existing = Assignee.query.filter_by(name=name).first()
+    if existing:
+        return jsonify({'error': 'Assignee already exists'}), 400
+
+    new_assignee = Assignee(name=name)
+    db.session.add(new_assignee)
+    db.session.commit()
+    
+    return jsonify(new_assignee.to_dict()), 201
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
