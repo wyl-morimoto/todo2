@@ -1,15 +1,15 @@
 :root {
-    --primary-color: #10b981; /* 5月らしいエメラルドグリーン */
-    --primary-hover: #059669;
-    --bg-color: #f0fdf4; /* ごく薄い新緑/白系背景 */
-    --glass-bg: rgba(255, 255, 255, 0.75);
-    --glass-border: rgba(255, 255, 255, 0.9);
-    --text-primary: #1e293b;
-    --text-secondary: #64748b;
-    --danger-color: #f43f5e;
-    --success-color: #10b981;
-    --table-header: rgba(241, 245, 249, 0.85);
-    --row-hover: rgba(16, 185, 129, 0.05); /* うっすらグリーンのホバー */
+    --primary-color: #34d399; /* 5月らしいエメラルドグリーン */
+    --primary-hover: #10b981;
+    --bg-color: #0f172a; /* ごく薄い新緑/白系背景 */
+    --glass-bg: rgba(30, 41, 59, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --danger-color: #fb7185;
+    --success-color: #34d399;
+    --table-header: rgba(15, 23, 42, 0.85);
+    --row-hover: rgba(255, 255, 255, 0.05); /* うっすらグリーンのホバー */
 }
 
 * {
@@ -51,7 +51,7 @@ body {
 .blob-1 {
     width: 500px;
     height: 500px;
-    background: #86efac; /* 新緑のライトグリーン */
+    background: #064e3b; /* 新緑のライトグリーン */
     top: -50px;
     left: -100px;
 }
@@ -59,7 +59,7 @@ body {
 .blob-2 {
     width: 600px;
     height: 600px;
-    background: #7dd3fc; /* 五月晴れの青空ブルー */
+    background: #1e3a8a; /* 五月晴れの青空ブルー */
     bottom: -150px;
     right: -100px;
     animation-delay: -12s;
@@ -79,7 +79,7 @@ body {
     border-radius: 0 0 20px 20px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 20px 40px -12px rgba(15, 23, 42, 0.15); /* 明るい背景に合うようにシャドウを弱めに */
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5); /* 明るい背景に合うようにシャドウを弱めに */
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     background: var(--glass-bg);
@@ -91,7 +91,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 12px 24px; /* 文字の上下は息苦しくない程度に戻す */
-    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 th.sortable {
@@ -100,7 +100,7 @@ th.sortable {
     transition: background-color 0.2s;
 }
 th.sortable:hover {
-    background-color: rgba(203, 213, 225, 0.4);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .app-header h1 {
@@ -116,7 +116,7 @@ th.sortable:hover {
 .tabs {
     display: flex;
     gap: 8px;
-    background: rgba(148, 163, 184, 0.15);
+    background: rgba(0, 0, 0, 0.2);
     padding: 4px;
     border-radius: 10px;
 }
@@ -138,7 +138,7 @@ th.sortable:hover {
 }
 
 .tab-btn.active {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
     color: var(--primary-color);
     box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
 }
@@ -156,7 +156,7 @@ th.sortable:hover {
     flex: 1;
     overflow-y: auto;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(30, 41, 59, 0.5);
     border: 1px solid rgba(226, 232, 240, 0.8);
     position: relative;
 }
@@ -185,12 +185,12 @@ th.sortable:hover {
     top: 0;
     z-index: 10;
     backdrop-filter: blur(8px);
-    border-bottom: 2px solid rgba(226, 232, 240, 0.8);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .task-table td {
     padding: 6px 14px; /* Reduced padding for tighter rows */
-    border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     font-size: 0.9rem;
     vertical-align: middle;
 }
@@ -229,13 +229,13 @@ th.sortable:hover {
 .task-table input[type="text"]:hover,
 .task-table input[type="date"]:hover,
 .task-table select:hover {
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .task-table input[type="text"]:focus,
 .task-table input[type="date"]:focus,
 .task-table select:focus {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
     border-color: var(--primary-color);
     outline: none;
     box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
@@ -279,7 +279,7 @@ th.sortable:hover {
     position: relative;
     height: 18px; /* Slightly smaller for tight layout */
     width: 18px;
-    background-color: #ffffff;
+    background-color: transparent;
     border: 1px solid rgba(148, 163, 184, 0.5);
     border-radius: 4px;
     transition: all 0.2s ease;
@@ -364,7 +364,7 @@ th.sortable:hover {
 
 /* Footer Add Task Section / Modal Container */
 .add-task-container {
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(226, 232, 240, 0.8);
     border-radius: 10px;
     padding: 12px 16px;
@@ -384,8 +384,8 @@ th.sortable:hover {
 
 .add-task-form input,
 .add-task-form select {
-    background: #ffffff;
-    border: 1px solid rgba(203, 213, 225, 0.8);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--text-primary);
     padding: 8px 12px;
     border-radius: 6px;
@@ -443,7 +443,7 @@ th.sortable:hover {
 .custom-checkbox {
     width: 18px; height: 18px;
     border: 1px solid rgba(148, 163, 184, 0.5);
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 3px;
     display: inline-block;
     position: relative;
@@ -502,7 +502,7 @@ th.sortable:hover {
 }
 
 .action-btn:hover {
-    background: rgba(148, 163, 184, 0.15);
+    background: rgba(0, 0, 0, 0.2);
     color: var(--text-primary);
 }
 
@@ -522,7 +522,7 @@ th.sortable:hover {
 }
 
 option {
-    background-color: #ffffff;
+    background-color: transparent;
     color: var(--text-primary);
 }
 
@@ -591,7 +591,7 @@ option {
     .add-task-container {
         width: 90%;
         max-width: 400px;
-        background: rgba(255, 255, 255, 0.95);
+        background: rgba(30, 41, 59, 0.95);
         border-radius: 16px;
         padding: 20px;
         box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
@@ -609,7 +609,7 @@ option {
         justify-content: space-between;
         align-items: center;
         margin-bottom: 16px;
-        border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         padding-bottom: 12px;
     }
 
