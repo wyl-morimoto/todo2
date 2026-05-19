@@ -203,33 +203,43 @@ th.sortable:hover {
     background: var(--row-hover);
 }
 
-/* Assignee specific row colors */
-.task-table tbody tr[data-assignee="森本"] {
-    background-color: rgba(16, 185, 129, 0.1); /* 薄い緑 */
-}
-.task-table tbody tr[data-assignee="森本"]:hover {
-    background-color: rgba(16, 185, 129, 0.2);
-}
-
-.task-table tbody tr[data-assignee="黒瀬"] {
-    background-color: rgba(249, 115, 22, 0.12); /* 淡いオレンジ */
-}
-.task-table tbody tr[data-assignee="黒瀬"]:hover {
-    background-color: rgba(249, 115, 22, 0.2);
+/* Assignee pill styles */
+.task-table tbody .col-assignee select {
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-weight: 500;
 }
 
-.task-table tbody tr[data-assignee="浅井"] {
-    background-color: rgba(14, 165, 233, 0.1); /* 薄い青 */
+.task-table tbody tr[data-assignee="森本"] .col-assignee select {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: #059669;
 }
-.task-table tbody tr[data-assignee="浅井"]:hover {
-    background-color: rgba(14, 165, 233, 0.2);
+.task-table tbody tr[data-assignee="森本"] .col-assignee select:hover {
+    background-color: rgba(16, 185, 129, 0.25);
 }
 
-.task-table tbody tr[data-assignee="木下"] {
-    background-color: rgba(236, 72, 153, 0.1); /* 薄いピンク */
+.task-table tbody tr[data-assignee="黒瀬"] .col-assignee select {
+    background-color: rgba(249, 115, 22, 0.15);
+    color: #c2410c;
 }
-.task-table tbody tr[data-assignee="木下"]:hover {
-    background-color: rgba(236, 72, 153, 0.2);
+.task-table tbody tr[data-assignee="黒瀬"] .col-assignee select:hover {
+    background-color: rgba(249, 115, 22, 0.25);
+}
+
+.task-table tbody tr[data-assignee="浅井"] .col-assignee select {
+    background-color: rgba(14, 165, 233, 0.15);
+    color: #0284c7;
+}
+.task-table tbody tr[data-assignee="浅井"] .col-assignee select:hover {
+    background-color: rgba(14, 165, 233, 0.25);
+}
+
+.task-table tbody tr[data-assignee="木下"] .col-assignee select {
+    background-color: rgba(236, 72, 153, 0.15);
+    color: #be185d;
+}
+.task-table tbody tr[data-assignee="木下"] .col-assignee select:hover {
+    background-color: rgba(236, 72, 153, 0.25);
 }
 
 /* Dynamic Inputs within the Table Grid */
