@@ -211,11 +211,11 @@ th.sortable:hover {
 }
 
 .task-table tbody tr[data-assignee="森本"] .col-assignee select {
-    background-color: rgba(16, 185, 129, 0.15);
-    color: #059669;
+    background-color: rgba(100, 116, 139, 0.15);
+    color: #475569;
 }
 .task-table tbody tr[data-assignee="森本"] .col-assignee select:hover {
-    background-color: rgba(16, 185, 129, 0.25);
+    background-color: rgba(100, 116, 139, 0.25);
 }
 
 .task-table tbody tr[data-assignee="黒瀬"] .col-assignee select {
@@ -235,11 +235,11 @@ th.sortable:hover {
 }
 
 .task-table tbody tr[data-assignee="木下"] .col-assignee select {
-    background-color: rgba(236, 72, 153, 0.15);
-    color: #be185d;
+    background-color: rgba(16, 185, 129, 0.15);
+    color: #059669;
 }
 .task-table tbody tr[data-assignee="木下"] .col-assignee select:hover {
-    background-color: rgba(236, 72, 153, 0.25);
+    background-color: rgba(16, 185, 129, 0.25);
 }
 
 /* Dynamic Inputs within the Table Grid */
