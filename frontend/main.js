@@ -305,6 +305,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const tr = document.createElement('tr');
             tr.className = 'fade-in-row';
             if (task.completed) tr.classList.add('row-completed');
+            if (task.assignee) {
+                tr.setAttribute('data-assignee', task.assignee);
+            }
             
             tr.innerHTML = `
                 <td class="col-content">

@@ -203,6 +203,35 @@ th.sortable:hover {
     background: var(--row-hover);
 }
 
+/* Assignee specific row colors */
+.task-table tbody tr[data-assignee="森本"] {
+    background-color: rgba(16, 185, 129, 0.1); /* 薄い緑 */
+}
+.task-table tbody tr[data-assignee="森本"]:hover {
+    background-color: rgba(16, 185, 129, 0.2);
+}
+
+.task-table tbody tr[data-assignee="黒瀬"] {
+    background-color: rgba(249, 115, 22, 0.12); /* 淡いオレンジ */
+}
+.task-table tbody tr[data-assignee="黒瀬"]:hover {
+    background-color: rgba(249, 115, 22, 0.2);
+}
+
+.task-table tbody tr[data-assignee="浅井"] {
+    background-color: rgba(14, 165, 233, 0.1); /* 薄い青 */
+}
+.task-table tbody tr[data-assignee="浅井"]:hover {
+    background-color: rgba(14, 165, 233, 0.2);
+}
+
+.task-table tbody tr[data-assignee="木下"] {
+    background-color: rgba(236, 72, 153, 0.1); /* 薄いピンク */
+}
+.task-table tbody tr[data-assignee="木下"]:hover {
+    background-color: rgba(236, 72, 153, 0.2);
+}
+
 /* Dynamic Inputs within the Table Grid */
 .task-table input[type="text"],
 .task-table input[type="date"],
