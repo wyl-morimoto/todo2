@@ -186,6 +186,7 @@ th.sortable:hover {
     z-index: 10;
     backdrop-filter: blur(8px);
     border-bottom: 2px solid rgba(226, 232, 240, 0.8);
+    white-space: nowrap;
 }
 
 .task-table td {
@@ -280,15 +281,41 @@ th.sortable:hover {
     box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
 }
 
-/* Column Widths Alignment */
-.col-content { width: 40%; }
-.col-date { width: 11%; }
-.col-urgent { width: 8%; text-align: center; }
-.col-assignee { width: 11%; }
-.col-status { width: 8%; text-align: center; }
-.col-actions { width: 9%; text-align: right; }
+/* Priority select styles */
+.priority-select {
+    border-radius: 20px !important;
+    padding: 4px 10px !important;
+    font-weight: 500;
+    text-align: center;
+    text-align-last: center;
+    border: none !important;
+    cursor: pointer;
+}
 
-.task-table th.col-urgent, .task-table td.col-urgent,
+.priority-select-high {
+    background-color: rgba(244, 63, 94, 0.15) !important;
+    color: #e11d48 !important;
+    font-weight: 600;
+}
+.priority-select-medium {
+    background-color: rgba(245, 158, 11, 0.15) !important;
+    color: #d97706 !important;
+    font-weight: 600;
+}
+.priority-select-low {
+    background-color: rgba(148, 163, 184, 0.15) !important;
+    color: #64748b !important;
+}
+
+/* Column Widths Alignment */
+.col-content { width: 38%; }
+.col-date { width: 11%; }
+.col-priority { width: 10%; text-align: center; }
+.col-assignee { width: 12%; }
+.col-status { width: 8%; text-align: center; }
+.col-actions { width: 10%; text-align: right; }
+
+.task-table th.col-priority, .task-table td.col-priority,
 .task-table th.col-status, .task-table td.col-status {
     text-align: center;
 }
@@ -590,11 +617,20 @@ option {
 
     .table-wrapper {
         overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .task-table {
         min-width: 800px;
+        table-layout: fixed;
     }
+
+    .col-content { width: 250px; }
+    .col-date { width: 130px; }
+    .col-priority { width: 80px; }
+    .col-assignee { width: 110px; }
+    .col-status { width: 70px; }
+    .col-actions { width: 70px; }
 
     /* Enable FAB */
     .mobile-fab {

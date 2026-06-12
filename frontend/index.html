@@ -17,7 +17,7 @@
 
     <div class="app-container glass-panel">
         <header class="app-header">
-            <h1>🌱 WyLのお仕事</h1>
+            <h1>☔ WyLのお仕事</h1>
             <div class="header-actions" style="display: flex; gap: 12px; align-items: center;">
                 <button id="download-csv-btn" class="primary-btn hidden" style="padding: 6px 12px; font-size: 0.85rem; display: none;">CSVダウンロード</button>
                 <div class="tabs">
@@ -34,7 +34,7 @@
                         <tr>
                             <th class="col-content">タスク内容</th>
                             <th class="col-date">記入日</th>
-                            <th class="col-urgent">緊急</th>
+                            <th class="col-priority">優先度</th>
                             <th class="col-date sortable" id="sort-due-date" title="クリックで並び替え">期日 🔼</th>
                             <th class="col-assignee">担当</th>
                             <th class="col-status">完了</th>
@@ -62,11 +62,11 @@
                     <form id="add-task-form" class="add-task-form">
                         <input type="text" id="new-content" placeholder="新しいタスクを入力..." required>
                         <input type="date" id="new-entry-date" required title="記入日">
-                        <label class="checkbox-label" title="緊急">
-                            <input type="checkbox" id="new-urgent">
-                            <span class="custom-checkbox"></span>
-                            <span class="cb-text">緊急</span>
-                        </label>
+                        <select id="new-priority" title="優先度" class="priority-select" required>
+                            <option value="低">優先度: 低</option>
+                            <option value="中" selected>優先度: 中</option>
+                            <option value="高">優先度: 高</option>
+                        </select>
                         <input type="date" id="new-due-date" title="期日">
                         
                         <div class="assignee-wrapper">

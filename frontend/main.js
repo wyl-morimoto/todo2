@@ -149,7 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const newTask = {
                 content: document.getElementById('new-content').value,
                 entry_date: document.getElementById('new-entry-date').value,
-                urgent: document.getElementById('new-urgent').checked,
+                priority: document.getElementById('new-priority').value,
+                urgent: document.getElementById('new-priority').value === '高',
                 due_date: document.getElementById('new-due-date').value,
                 assignee: document.getElementById('new-assignee').value,
                 completed: false
@@ -163,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 if (res.ok) {
                     document.getElementById('new-content').value = '';
-                    document.getElementById('new-urgent').checked = false;
+                    document.getElementById('new-priority').value = '中';
                     document.getElementById('new-due-date').value = '';
                     assigneeSelect.value = '';
                     await fetchTasks();
@@ -191,17 +192,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // CSV header
-            let csvContent = "タスク内容,記入日,期日,緊急,担当,完了日\n";
+            let csvContent = "タスク内容,記入日,期日,優先度,担当,完了日\n";
 
             completedTasks.forEach(task => {
                 const content = `"${(task.content || '').replace(/"/g, '""')}"`;
                 const entryDate = task.entry_date || '';
                 const dueDate = task.due_date || '';
-                const urgent = task.urgent ? 'はい' : 'いいえ';
+                const priority = task.priority || '中';
                 const assignee = task.assignee || '';
                 const completedDate = task.completed_date || '';
                 
-                csvContent += `${content},${entryDate},${dueDate},${urgent},${assignee},${completedDate}\n`;
+                csvContent += `${content},${entryDate},${dueDate},${priority},${assignee},${completedDate}\n`;
             });
 
             // Excel文字化け防止用BOM
@@ -316,11 +317,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td class="col-date">
                     <input type="date" value="${task.entry_date}" data-id="${task.id}" data-field="entry_date" />
                 </td>
-                <td class="col-urgent">
-                    <label class="checkbox-container urgent-cb">
-                        <input type="checkbox" ${task.urgent ? 'checked' : ''} data-id="${task.id}" data-field="urgent" />
-                        <span class="checkmark"></span>
-                    </label>
+                <td class="col-priority">
+                    <select data-id="${task.id}" data-field="priority" class="priority-select ${task.priority === '高' ? 'priority-select-high' : task.priority === '中' ? 'priority-select-medium' : 'priority-select-low'}">
+                        <option value="高" ${task.priority === '高' ? 'selected' : ''}>高</option>
+                        <option value="中" ${task.priority === '中' || !task.priority ? 'selected' : ''}>中</option>
+                        <option value="低" ${task.priority === '低' ? 'selected' : ''}>低</option>
+                    </select>
                 </td>
                 <td class="col-date">
                     ${currentTab === 'active' 
@@ -355,6 +357,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 input.addEventListener('change', (e) => {
                     const field = e.target.dataset.field;
                     let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+                    if (field === 'priority') {
+                        e.target.className = `priority-select ${value === '高' ? 'priority-select-high' : value === '中' ? 'priority-select-medium' : 'priority-select-low'}`;
+                    }
                     // カレンダー操作等でリフレッシュが必要になるため、日付を更新した場合は自動ソート＆再描画
                     updateTask(task.id, { [field]: value }, true);
                 });

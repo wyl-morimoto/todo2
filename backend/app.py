@@ -29,6 +29,7 @@ class Task(db.Model):
     content = db.Column(db.Text, nullable=False)
     entry_date = db.Column(db.String(20), nullable=False)
     urgent = db.Column(db.Boolean, nullable=False, default=False)
+    priority = db.Column(db.String(10), nullable=False, default='中')
     due_date = db.Column(db.String(20))
     assignee = db.Column(db.String(50))
     completed = db.Column(db.Boolean, nullable=False, default=False)
@@ -40,6 +41,7 @@ class Task(db.Model):
             'content': self.content,
             'entry_date': self.entry_date,
             'urgent': self.urgent,
+            'priority': self.priority,
             'due_date': self.due_date,
             'assignee': self.assignee,
             'completed': self.completed,
@@ -65,6 +67,21 @@ with app.app_context():
         db.session.execute(text("ALTER TABLE tasks ADD COLUMN completed_date VARCHAR(20)"))
         db.session.commit()
     except Exception:
+        db.session.rollback()
+
+    try:
+        db.session.execute(text("ALTER TABLE tasks ADD COLUMN priority VARCHAR(10) DEFAULT '中'"))
+        db.session.commit()
+    except Exception:
+        db.session.rollback()
+
+    try:
+        urgent_tasks = Task.query.filter((Task.urgent == True) & ((Task.priority == None) | (Task.priority == '低') | (Task.priority == '中'))).all()
+        for t in urgent_tasks:
+            t.priority = '高'
+        db.session.commit()
+    except Exception as e:
+        print(f"Migration error: {e}")
         db.session.rollback()
 
     # デフォルト担当者の追加
@@ -101,7 +118,8 @@ def create_task():
     new_task = Task(
         content=content,
         entry_date=entry_date,
-        urgent=bool(data.get('urgent', False)),
+        urgent=bool(data.get('urgent', False)) or data.get('priority') == '高',
+        priority=data.get('priority', '中'),
         due_date=data.get('due_date'),
         assignee=data.get('assignee'),
         completed=bool(data.get('completed', False))
@@ -125,6 +143,9 @@ def update_task(task_id):
         task.entry_date = data['entry_date']
     if 'urgent' in data:
         task.urgent = bool(data['urgent'])
+    if 'priority' in data:
+        task.priority = data['priority']
+        task.urgent = (data['priority'] == '高')
     if 'due_date' in data:
         task.due_date = data['due_date']
     if 'assignee' in data:
